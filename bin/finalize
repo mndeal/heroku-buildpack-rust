@@ -7,7 +7,7 @@ CACHE_DIR=${2:-}
 DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 
-ls $DEPS_DIR
+find $DEPS_DIR
 
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
