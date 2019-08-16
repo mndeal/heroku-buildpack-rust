@@ -4,15 +4,10 @@
 # heroku-buildpack-nodejs code).
 BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
-ENV_DIR=${3:-}
-BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+DEPS_DIR=${3:-}
+INDEX_DIR=${4:-}
 
-# Export DATABASE_URL at build time, mostly because Diesel is the best way to
-# do SQL in Rust right now, and Diesel will use it to generate code for the
-# database schema.
-if [ -e "$ENV_DIR/DATABASE_URL" ]; then
-  export DATABASE_URL="$(cat $ENV_DIR/DATABASE_URL)";
-fi
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 # Set defaults for our configuration variables.  Stable Rust is sufficiently
 # stable at this point that I think we can just default it.
