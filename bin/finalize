@@ -7,6 +7,8 @@ CACHE_DIR=${2:-}
 DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 
+ls $CACHE_DIR
+
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 # Set defaults for our configuration variables.  Stable Rust is sufficiently
