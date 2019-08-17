@@ -7,9 +7,9 @@ CACHE_DIR=${2:-}
 DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 
-echo $DEPS_DIR
-echo lakjsdlkjasdljk
-find $DEPS_DIRsas
+# echo $DEPS_DIR
+# echo lakjsdlkjasdljk
+# find $DEPS_DIR
 
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
