@@ -2,10 +2,10 @@
 
 BUILD_DIR=${1:-}
 
-find $BUILD_DIR/target/release/step_diagnose
+# find $BUILD_DIR/target/release/step_diagnose
 
 # find $BUILD_DIR
 
 # EXECUTABLE=$BUILD_DIR/target/release/step_diagnose
 
-# echo "default_process_types:\nweb: ${EXECUTABLE}"
+echo default_process_types:\nweb:\ $EXECUTABLE
