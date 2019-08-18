@@ -8,5 +8,5 @@ BUILD_DIR=${1:-}
 
 # EXECUTABLE=$BUILD_DIR/target/release/step_diagnose
 
-echo "default_process_types:"
-echo "  web: ${EXECUTABLE}"
+# echo "default_process_types:"
+# echo "  web: ${EXECUTABLE}"
