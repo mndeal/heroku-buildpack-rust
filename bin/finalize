@@ -8,15 +8,17 @@ DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
+cp -r $DEPS_DIR/0/lib $BUILD_DIR/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
 # export RUSTFLAGS="-L $DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu -l static=odbc"
 
-echo $RUSTFLAGS
+# echo $RUSTFLAGS
 
 # Export DATABASE_URL at build time, mostly because Diesel is the best way to
 # do SQL in Rust right now, and Diesel will use it to generate code for the
