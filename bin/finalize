@@ -146,12 +146,12 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   rm -rf target/
   mkdir -p target/release
 
-  cp $DEPS_DIR/0/lib/libodbc.so target/release
+  cp $DEPS_DIR/0/lib/libodbc.so .
 
-  ln -sf target/release/libodbc.so target/release/libodbc.so.2
+  ln -sf target/release/libodbc.so ./libodbc.so.2
 
   cargo build $RUST_CARGO_BUILD_FLAGS
-  find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
+  find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t . {} \;
   echo "foo"
   find $BUILD_DIR
   echo "bar"
