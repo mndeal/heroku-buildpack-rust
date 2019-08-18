@@ -2,11 +2,4 @@
 
 BUILD_DIR=${1:-}
 
-# find $BUILD_DIR/target/release/step_diagnose
-
-# find $BUILD_DIR
-
-# EXECUTABLE=$BUILD_DIR/target/release/step_diagnose
-
-# echo "default_process_types:"
-# echo "  web: ${EXECUTABLE}"
+# This script only exists to satisfy Cloud Foundry's definition of a buildpack.
