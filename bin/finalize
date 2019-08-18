@@ -138,37 +138,33 @@ fi
 # which describe how this needs to be named.
 export CARGO_TARGET_DIR="$CACHE_DIR/target"
 
-# if [ $RUST_SKIP_BUILD -ne 1 ]; then
-  # Build our project (into CARGO_TARGET_DIR so we have caching) and copy it
-  # back to the source tree.  In theory, we could probably just copy the
-  # binary or do something clever with `cargo install`, but we haven't
-  # figured that out yet.
-  #
-  # To debug git issues:
-  #export RUST_LOG="cargo::sources::git=debug"
-  # To debug compiler and linking issues, add `--verbose`.
-  echo "-----> Building application using Cargo"
-  cd "$BUILD_DIR/$BUILD_PATH"
-  rm -rf target/
-  mkdir -p target/release
+# Build our project (into CARGO_TARGET_DIR so we have caching) and copy it
+# back to the source tree.  In theory, we could probably just copy the
+# binary or do something clever with `cargo install`, but we haven't
+# figured that out yet.
+#
+# To debug git issues:
+#export RUST_LOG="cargo::sources::git=debug"
+# To debug compiler and linking issues, add `--verbose`.
+echo "-----> Building application using Cargo"
+cd "$BUILD_DIR/$BUILD_PATH"
+rm -rf target/
+mkdir -p target/release
 
-  cp $DEPS_DIR/0/lib/libodbc.so target/release
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:target/release
-  export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
-  export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
-  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
+cp $DEPS_DIR/0/lib/libodbc.so target/release
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:target/release
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
-  cargo build $RUST_CARGO_BUILD_FLAGS
-  find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
-  echo "foo"
-  find $BUILD_DIR
-  echo "bar"
-  find $DEPS_DIR
-  echo "baz"
-  find target/release
-# else
-  # echo "-----> Skipping Cargo build"
-# fi
+cargo build $RUST_CARGO_BUILD_FLAGS
+find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
+echo "foo"
+find $BUILD_DIR
+echo "bar"
+find $DEPS_DIR
+echo "baz"
+find target/release
 
 # Install diesel so we can use it for migrations
 if [ $RUST_INSTALL_DIESEL -eq 1 ]; then
