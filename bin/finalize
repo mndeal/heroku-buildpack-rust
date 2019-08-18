@@ -8,13 +8,13 @@ DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
-export RUSTFLAGS="-l $DEPS_DIR/0/lib/libodbc.a"
+export RUSTFLAGS="-l static=libodbc"
 
 echo $RUSTFLAGS
 
