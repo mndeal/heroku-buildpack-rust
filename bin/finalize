@@ -14,7 +14,7 @@ export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
-export RUSTFLAGS="-fPIC -L $DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu -l static=odbc"
+export RUSTFLAGS="-L $DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu -l static=odbc"
 
 echo $RUSTFLAGS
 
