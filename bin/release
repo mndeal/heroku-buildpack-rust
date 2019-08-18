@@ -2,4 +2,6 @@
 
 BUILD_DIR=${1:-}
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
+
 # This script only exists to satisfy Cloud Foundry's definition of a buildpack.
