@@ -10,11 +10,11 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/lib
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu
-cp -r $DEPS_DIR/0/lib $BUILD_DIR/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
+# cp -r $DEPS_DIR/0/lib $BUILD_DIR/lib
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
+# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
+# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
+# export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
 # export RUSTFLAGS="-L $DEPS_DIR/0/apt/usr/lib/x86_64-linux-gnu -l static=odbc"
 
@@ -150,12 +150,16 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   echo "-----> Building application using Cargo"
   cd "$BUILD_DIR/$BUILD_PATH"
   rm -rf target/
-  cargo build $RUST_CARGO_BUILD_FLAGS
   mkdir -p target/release
-  # find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
-  # cp $DEPS_DIR/0/lib/libodbc.so target/release
-  find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t . {} \;
-  cp $DEPS_DIR/0/lib/libodbc.so .
+
+  cp $DEPS_DIR/0/lib/libodbc.so target/release
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:target/release
+  export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
+  export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
+  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
+
+  cargo build $RUST_CARGO_BUILD_FLAGS
+  find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
   echo "foo"
   find $BUILD_DIR
   echo "bar"
