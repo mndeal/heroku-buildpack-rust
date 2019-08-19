@@ -8,8 +8,6 @@ DEPS_DIR=${3:-}
 INDEX_DIR=${4:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-# cp -r $DEPS_DIR/0/lib $BUILD_DIR/lib
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/target/release
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
@@ -146,11 +144,7 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   cd "$BUILD_DIR/$BUILD_PATH"
   rm -rf target/
   mkdir -p target/release
-
   cp $DEPS_DIR/0/lib/libodbc.so* target/release
-
-  # ln -sf target/release/libodbc.so target/release/libodbc.so.2
-
   cargo build $RUST_CARGO_BUILD_FLAGS
   find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
   echo "roblox"
