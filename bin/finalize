@@ -144,7 +144,9 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   cd "$BUILD_DIR/$BUILD_PATH"
   rm -rf target/
   mkdir -p target/release
+
   cp $DEPS_DIR/0/lib/libodbc.so* target/release
+  
   cargo build $RUST_CARGO_BUILD_FLAGS
   find "$CARGO_TARGET_DIR/release" -maxdepth 1 -type f -executable -exec cp -a -t target/release {} \;
 
@@ -152,19 +154,6 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   cd target/release
   tar -xvf ibm.tar.gz
   cd "$BUILD_DIR/$BUILD_PATH"
-
-  echo "roblox"
-  ldd target/release/step_diagnose
-  echo "foo"
-  find $BUILD_DIR
-  echo "bar"
-  find $DEPS_DIR
-  echo "baz"
-  find target/release
-  echo "minecraft"
-  pwd
-  echo "blockland"
-  ls -lah target/release
 else
   echo "-----> Skipping Cargo build"
 fi
