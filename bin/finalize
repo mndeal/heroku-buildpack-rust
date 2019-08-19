@@ -10,9 +10,10 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 # cp -r $DEPS_DIR/0/lib $BUILD_DIR/lib
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/lib
-# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
-# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
-# export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/target/release
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/include
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEPS_DIR/0/apt/usr/include
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEPS_DIR/0/pkgconfig
 
 # Export DATABASE_URL at build time, mostly because Diesel is the best way to
 # do SQL in Rust right now, and Diesel will use it to generate code for the
