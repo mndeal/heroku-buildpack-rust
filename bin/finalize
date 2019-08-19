@@ -157,6 +157,8 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   find target/release
   echo "minecraft"
   pwd
+  echo "blockland"
+  ls -lah target/release
 else
   echo "-----> Skipping Cargo build"
 fi
