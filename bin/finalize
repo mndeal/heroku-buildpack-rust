@@ -161,6 +161,8 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   find $DEPS_DIR
   echo "baz"
   find target/release
+  echo "minecraft"
+  pwd
 else
   echo "-----> Skipping Cargo build"
 fi
